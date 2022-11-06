@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+    <form method="POST">
+        <div class="card mt-4 mx-4">
+            <div class="card-header">
+                <h4 class="text-center">
+                    <strong>Edit Post - {{blog_post.title}}</strong>
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="title" placeholder="{{blog_post.title}}" value="{{blog_post.title}}"/>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <textarea class="form-control" rows="12" name="content" placeholder="{{blog_post.content}}">
+                            {{blog_post.content}}
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning form-control">Edit!</submit>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

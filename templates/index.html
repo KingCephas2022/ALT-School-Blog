@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if current_user.is_authenticated %}
+  <h1>Welcome! You are logged in</h1>
+  {% if blog_posts|length > 0 %}
+    {% for blog_post in blog_posts%}
+        <div class="card mt-4 mx-4">
+            <div class="card-header">
+                <h4 class="text-left" style="text-align:left;">
+                    <strong>{{blog_post.get_author_header()}}</strong>
+                </h4>
+                <h5 class="text-left" style="text-align:right;">
+                    <strong>{{blog_post.date_posted.strftime('%Y-%m-%d')}}</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <p><strong>{{blog_post.title}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <p>{{blog_post.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <a class="btn btn-danger" href="{{url_for('post_delete',id=blog_post.id)}}">delete</a>
+                    <a class="btn btn-warning" href="{{url_for('post_edit',id=blog_post.id)}}">edit</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+  {% else %}
+    <div class="text-enter">
+        <p><strong>No posts to show</strong></p>
+    </div>
+  {% endif %}
+{% else %}
+  <h1>Welcome to Music Blog!</h1>
+{% endif %}
+{% endblock content %}
